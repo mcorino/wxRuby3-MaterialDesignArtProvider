@@ -1,0 +1,10 @@
+--charset UTF-8
+--markup markdown
+--markup-provider kramdown
+--asset lib/wx/md_art/art:art
+--title "wxRuby3 MaterialDesignArtProvider Documentation"
+--no-private
+--hide-api private
+lib
+-
+lib/wx/md_art/doc/**/*.md
