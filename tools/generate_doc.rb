@@ -89,7 +89,7 @@ Wx::MDArt.art_client_group_ids.each do |art_group|
     Wx::MDArt.art_client_ids_for_group(art_group).size.times { fdoc.print('---|') }
     fdoc.puts
     Wx::MDArt.get_art_ids_for_group(art_group).each do |sym|
-      fdoc.print("| `#{sym}`{:\##{sym}} |")
+      fdoc.print("| `Wx::MDArt::#{sym}`{:\##{sym}} |")
       Wx::MDArt.art_client_ids_for_group(art_group).each do |clt|
         svg = Wx::MDArt.art_for(Wx::MDArt.const_get(clt), Wx::MDArt.const_get(sym))
         if svg
@@ -127,7 +127,7 @@ File.open(File.join(doc_folder, "STANDARD-Art-Mappings.md"), "w+") do |fdoc|
   mapped_clients.size.times { fdoc.print('---|') }
   fdoc.puts
   std_art_ids.each do |sym|
-    fdoc.print("| `#{sym}` |")
+    fdoc.print("| `Wx::#{sym}` |")
     mapped_clients.each do |clt|
       svg = Wx::MDArt.art_for(Wx::MDArt.const_get(clt), Wx.const_get(sym))
       if svg
