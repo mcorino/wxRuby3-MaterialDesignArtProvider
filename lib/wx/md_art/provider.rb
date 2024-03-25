@@ -234,7 +234,7 @@ module Wx
             map_art_id from_art: Wx::ART_PRINT, to_art: Wx::MDArt::ART_PRINT
             map_art_id from_art: Wx::ART_HELP, to_art: Wx::MDArt::ART_HELP
             map_art_id from_art: Wx::ART_TIP, to_art: Wx::MDArt::ART_LIGHTBULB
-            map_art_id from_art: Wx::ART_REPORT_VIEW, to_art: Wx::MDArt::ART_VIEW_COMFY_ALT
+            map_art_id from_art: Wx::ART_REPORT_VIEW, to_art: Wx::MDArt::ART_WYSIWYG
             map_art_id from_art: Wx::ART_LIST_VIEW, to_art: Wx::MDArt::ART_VIEW_LIST
             map_art_id from_art: Wx::ART_NEW_DIR, to_art: Wx::MDArt::ART_CREATE_NEW_FOLDER
             map_art_id from_art: Wx::ART_FOLDER, to_art: Wx::MDArt::ART_FOLDER
