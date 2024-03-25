@@ -3,5 +3,10 @@
 # This software is released under the MIT license.
 
 
-require 'wx/md_art/version'
-require 'wx/md_art/provider'
+module Wx
+  module MDArt
+
+    VERSION = '1.0.0'
+
+  end
+end
