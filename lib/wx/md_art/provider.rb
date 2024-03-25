@@ -205,6 +205,8 @@ module Wx
             map_art_id from_art: Wx::ART_FLOPPY, to_art: Wx::MDArt::ART_SAVE
             map_art_id from_art: Wx::ART_CDROM, to_art: Wx::MDArt::ART_CD
             map_art_id from_art: Wx::ART_REMOVABLE, to_art: Wx::MDArt::ART_PLUG_DISCONNECTED
+            map_art_id from_art: Wx::ART_STOP, to_art: Wx::MDArt::ART_STOP
+            map_art_id from_art: Wx::ART_REFRESH, to_art: Wx::MDArt::ART_ARROW_SYNC
           end
 
           redirect_art for_client: Wx::MDArt::ART_FLUENT_UI_REGULAR, to_client: Wx::MDArt::ART_FLUENT_UI_FILLED
@@ -265,6 +267,8 @@ module Wx
             map_art_id from_art: Wx::ART_FLOPPY, to_art: Wx::MDArt::ART_SAVE
             map_art_id from_art: Wx::ART_CDROM, to_art: Wx::MDArt::ART_CD, to_client: Wx::MDArt::ART_FLUENT_UI_FILLED
             map_art_id from_art: Wx::ART_REMOVABLE, to_art: Wx::MDArt::ART_PLUG_DISCONNECTED, to_client: Wx::MDArt::ART_FLUENT_UI_FILLED
+            map_art_id from_art: Wx::ART_STOP, to_art: Wx::MDArt::ART_STOP
+            map_art_id from_art: Wx::ART_REFRESH, to_art: Wx::MDArt::ART_SYNC
           end
 
           redirect_art for_client: Wx::MDArt::ART_MATERIAL_DESIGN_OUTLINED, to_client: Wx::MDArt::ART_MATERIAL_DESIGN_FILLED do
@@ -337,6 +341,8 @@ module Wx
             map_art_id from_art: Wx::ART_FLOPPY, to_art: Wx::MDArt::ART_FLOPPY_DISK
             map_art_id from_art: Wx::ART_CDROM, to_art: Wx::MDArt::ART_CD, to_client: Wx::MDArt::ART_FLUENT_UI_FILLED
             map_art_id from_art: Wx::ART_REMOVABLE, to_art: Wx::MDArt::ART_PLUG
+            map_art_id from_art: Wx::ART_STOP, to_art: Wx::MDArt::ART_STOP
+            map_art_id from_art: Wx::ART_REFRESH, to_art: Wx::MDArt::ART_ARROWS_ROTATE
           end
 
           redirect_art for_client: Wx::MDArt::ART_FONT_AWESOME_REGULAR, to_client: Wx::MDArt::ART_FONT_AWESOME_SOLID do

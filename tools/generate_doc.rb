@@ -117,7 +117,7 @@ File.open(File.join(doc_folder, "STANDARD-Art-Mappings.md"), "w+") do |fdoc|
     ART_PLUS ART_MINUS
     ART_CLOSE ART_QUIT ART_FIND ART_FIND_AND_REPLACE
     ART_FULL_SCREEN ART_EDIT
-    ART_HARDDISK ART_FLOPPY ART_CDROM ART_REMOVABLE]
+    ART_HARDDISK ART_FLOPPY ART_CDROM ART_REMOVABLE ART_STOP ART_REFRESH]
   fdoc << <<~__HEREDOC
     # Material Design Standard ArtId mapping Overview
 
