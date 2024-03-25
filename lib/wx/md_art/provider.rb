@@ -497,6 +497,69 @@ module Wx
     # Material Design art provider class.
     class MaterialDesignArtProvider < Wx::ArtProvider
 
+      class << self
+
+        private
+
+        def art_colour
+          @art_colour
+        end
+
+        def set_art_colour(colour)
+          @art_colour = if colour.is_a?(Wx::Colour)
+                          colour
+                        else
+                          colour ? Wx::Colour.new(colour) : nil
+                        end
+        end
+
+        def default_sizes
+          @def_sizes ||= {}
+        end
+
+        public
+
+        # Sets the active colour to use for created MaterialDesign art.
+        # By default the colour is `nil` (which is equivalent to :BLACK).
+        # @param [Wx::Colour,String,Symbol,nil] colour
+        def use_art_colour(colour)
+          set_art_colour(colour)
+        end
+
+        # Sets the active colour to use for created MaterialDesign art in the scope of the given block.
+        # After the block returns the colour is restored to it's setting from before the block.
+        # @param [Wx::Colour,String,Symbol,nil] colour
+        def with_art_colour(colour)
+          prev_colour = art_colour
+          begin
+            set_art_colour(colour)
+            yield if block_given?
+          ensure
+            set_art_colour(prev_colour)
+          end
+        end
+
+        # Returns the default art size for the given ArtClientId.
+        # By default will derive default from {Wx::ArtProvider.get_native_size_hint}.
+        # @param [String] client Art Client Id
+        # @return [Wx::size]
+        def get_default_size(client)
+          unless default_sizes.has_key?(client)
+            def_sz = Wx::ArtProvider.get_native_size_hint(client)
+            default_sizes[client] = (def_sz == Wx::DEFAULT_SIZE ? Wx::Size.new(24,24) : def_sz)
+          end
+          default_sizes[client]
+        end
+
+        # Sets the default art size for the given ArtClientId.
+        # @param [String] client Art Client Id
+        # @param [Wx::Size,Array(Integer,Integer)] size
+        def set_default_size(client, size)
+          default_sizes[client] = size.to_size
+        end
+
+      end
+
       protected
 
       def create_bitmap(id, client, size)
@@ -511,16 +574,37 @@ module Wx
         art_path = MDArt.get_art_for(client, id)
         return Wx::NULL_BITMAP unless art_path
         size = size.to_size # make sure to have a Wx::Size
-        size = Wx::Size.new(24,24) if size == Wx::DEFAULT_SIZE
-        # create bundle
-        Wx::BitmapBundle.from_svg_file(art_path, size)
+        size = MaterialDesignArtProvider.get_default_size(client) if size == Wx::DEFAULT_SIZE
+        if (art_clr = MaterialDesignArtProvider.__send__(:art_colour))
+          svg_data = change_svg_colour(File.read(art_path), art_clr)
+          Wx::BitmapBundle.from_svg(svg_data, size)
+        else
+          # create bundle
+          Wx::BitmapBundle.from_svg_file(art_path, size)
+        end
       end
 
       def create_icon_bundle(id, client)
-        bundle = create_bitmap_bundle(id, client, [24,24])
-        Wx::IconBundle.new(bundle.get_icon([24,24]))
+        bundle = create_bitmap_bundle(id, client, size = MaterialDesignArtProvider.get_default_size(client))
+        Wx::IconBundle.new(bundle.get_icon(size))
       end
 
+      private
+
+      # @api private
+      FILL_RE = /fill="#(?:[0-9a-fA-F]{3,4}){1,2}"/
+      # @api private
+      PATH_RE = /<path\s/
+
+      def change_svg_colour(svg_data, colour)
+        # see if we can replace the path colours
+        rc = svg_data.gsub!(FILL_RE, "fill=\"#{colour.get_as_string(Wx::C2S_HTML_SYNTAX)}\"")
+        # if any replaced we're done
+        return svg_data if rc
+        # insert colour to every <path ...>
+        svg_data.gsub!(PATH_RE, "<path fill=\"#{colour.get_as_string(Wx::C2S_HTML_SYNTAX)}\"")
+        svg_data
+      end
 
     end
 
