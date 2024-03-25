@@ -5,4 +5,5 @@ bin
 obj
 doc
 ext
+pkg
 lib/wx/md_art/doc
