@@ -1,10 +1,19 @@
+--load rakelib/yard/yard-relative_markdown_links.rb
+--load rakelib/yard/yard-custom-templates.rb
 --charset UTF-8
 --markup markdown
 --markup-provider kramdown
+--readme README.md
 --asset lib/wx/md_art/art:art
+--asset assets:art
 --title "wxRuby3 MaterialDesignArtProvider Documentation"
 --no-private
 --hide-api private
 lib
 -
 lib/wx/md_art/doc/**/*.md
+LICENSE
+CREDITS.md
+Apache2.0-LICENSE
+CC01.0-LICENSE.md
+CCBY4.0-LICENSE
