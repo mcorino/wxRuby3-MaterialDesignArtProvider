@@ -38,8 +38,9 @@ Wx::ArtProvider.push(Wx::MDAP::MaterialDesignArtProvider.new)
 
 Now that the new art provider has been installed the new Material Design art ids can be used. Constants for these are
 all defined in the `Wx::MDAP` module as 'Wx::MDAP::ART_*ICON_NAME*' (see [here](https://mcorino.github.io/wxRuby3-MDAP/Wx/MDAP.html)).
-Many of these art ids are available under the various client ids (also defined [here](https://mcorino.github.io/wxRuby3-MDAP/Wx/MDAP.html))
-which each correspond to a different collection in the full dataset:
+Many of these art ids are available under most of the various client ids (also defined [here](https://mcorino.github.io/wxRuby3-MDAP/Wx/MDAP.html))
+while others are only available under some client ids (as can be seen in the documentation).
+The client ids each correspond to a different collection in the full dataset: 
 
 - **Material Design** art
   - `Wx::MDAP::ART_MATERIAL_DESIGN_FILLED`
