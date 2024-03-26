@@ -3,5 +3,8 @@
 # This software is released under the MIT license.
 
 
-require 'wx/md_art/version'
-require 'wx/md_art/provider'
+require 'wx/core'
+
+require 'wx/mdap/version'
+require 'wx/mdap/art'
+require 'wx/mdap/provider'

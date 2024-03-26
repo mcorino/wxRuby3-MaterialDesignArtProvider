@@ -4,7 +4,7 @@
 
 
 module Wx
-  module MDArt
+  module MDAP
 
     VERSION = '1.0.0'
 

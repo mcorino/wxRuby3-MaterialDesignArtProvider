@@ -25,7 +25,7 @@ def stylesheets_full_list
 end
 
 def logo_and_version
-  wxver = Registry['Wx::MDArt::VERSION']
+  wxver = Registry['Wx::MDAP::VERSION']
   <<~__HTML
   <div class='wxrb-logo'>
     <img src='art/logo.svg' height='38'/>

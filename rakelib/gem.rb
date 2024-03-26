@@ -13,7 +13,7 @@ end
 
 require_relative './lib/config'
 
-module WXRuby3MDArt
+module WXRuby3MDAP
 
   module Gem
 
@@ -38,7 +38,7 @@ module WXRuby3MDArt
     end
 
     def self.gem_file(name, version)
-      File.join('pkg', "#{WXRuby3MDArt::Gem.gem_name(name, version)}.gem")
+      File.join('pkg', "#{WXRuby3MDAP::Gem.gem_name(name, version)}.gem")
     end
 
     def self.build_gem(gemspec)

@@ -4,14 +4,14 @@
 --markup markdown
 --markup-provider kramdown
 --readme README.md
---asset lib/wx/md_art/art:art
+--asset lib/wx/mdap/art:art
 --asset assets:art
 --title "wxRuby3 MaterialDesignArtProvider Documentation"
 --no-private
 --hide-api private
 lib
 -
-lib/wx/md_art/doc/**/*.md
+lib/wx/mdap/doc/**/*.md
 LICENSE
 CREDITS.md
 Apache2.0-LICENSE

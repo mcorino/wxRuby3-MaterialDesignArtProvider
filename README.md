@@ -1,5 +1,5 @@
 
-# Material Design icons art provider for wxRuby3
+# Material Design Art Provider for wxRuby3
 
 ## License
 

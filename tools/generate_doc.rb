@@ -1,18 +1,17 @@
 
 require 'wx/core'
-require 'wx/md_art'
+require 'wx/mdap'
 
 require 'fileutils'
 require 'base64'
-require 'pathname'
 
 # determine doc folder path
-md_art_folder = File.expand_path(File.join(__dir__, '..', 'lib', 'wx', 'md_art'))
-doc_folder = File.join(md_art_folder, 'doc')
+mdap_folder = File.expand_path(File.join(__dir__, '..', 'lib', 'wx', 'mdap'))
+doc_folder = File.join(mdap_folder, 'doc')
 # make sure the doc folder exists
 FileUtils.mkdir_p(doc_folder)
 # write constants doc
-File.open(File.join(doc_folder, 'md_art.rb'), "w+") do |fdoc|
+File.open(File.join(doc_folder, 'mdap.rb'), "w+") do |fdoc|
 
   fdoc << <<~__HEREDOC
     # :stopdoc:
@@ -23,13 +22,13 @@ File.open(File.join(doc_folder, 'md_art.rb'), "w+") do |fdoc|
     
     module Wx
 
-      module MDArt
+      module MDAP
 
         # @!group Art Client Id Constants
 
   __HEREDOC
 
-  Wx::MDArt.all_art_clients.each do |sym|
+  Wx::MDAP.all_art_clients.each do |sym|
     case sym
     when :ART_FONT_AWESOME_BRANDS, :ART_SIMPLE_ICONS_ICONS
       fdoc.puts "    # MaterialDesignArtProvider only provides (brand-)specific icons for this art client."
@@ -38,7 +37,7 @@ File.open(File.join(doc_folder, 'md_art.rb'), "w+") do |fdoc|
       fdoc.puts "    # MaterialDesignArtProvider provides standard ArtId mappings for this art client (see {file:STANDARD-Art-Mappings.md})."
     end
     fdoc.puts '    #'
-    fdoc.puts "    # See {file:#{Wx::MDArt.art_group_for_client(sym)}-Art.md} for an overview of provided icons."
+    fdoc.puts "    # See {file:#{Wx::MDAP.art_group_for_client(sym)}-Art.md} for an overview of provided icons."
     fdoc.puts "    #{sym} = _"
     fdoc.puts
   end
@@ -51,14 +50,13 @@ File.open(File.join(doc_folder, 'md_art.rb'), "w+") do |fdoc|
 
   __HEREDOC
 
-  md_art_path = Pathname(md_art_folder)
-  Wx::MDArt.all_art_ids.each do |sym|
+  Wx::MDAP.all_art_ids.each do |sym|
 
     fdoc.puts '    # Available for :'
     fdoc.puts '    #'
-    Wx::MDArt.all_art_clients.each do |clt|
-      if Wx::MDArt.has_art_id?(Wx::MDArt.const_get(clt), Wx::MDArt.const_get(sym))
-        fdoc.puts "    # - {file:#{Wx::MDArt.art_group_for_client(clt)}-Art.md\##{sym} #{clt}}"
+    Wx::MDAP.all_art_clients.each do |clt|
+      if Wx::MDAP.has_art_id?(Wx::MDAP.const_get(clt), Wx::MDAP.const_get(sym))
+        fdoc.puts "    # - {file:#{Wx::MDAP.art_group_for_client(clt)}-Art.md\##{sym} #{clt}}"
       end
     end
     fdoc.puts '    #'
@@ -78,20 +76,20 @@ File.open(File.join(doc_folder, 'md_art.rb'), "w+") do |fdoc|
 end
 
 # write art client group overview tables
-Wx::MDArt.art_client_group_ids.each do |art_group|
+Wx::MDAP.art_client_group_ids.each do |art_group|
   File.open(File.join(doc_folder, "#{art_group}-Art.md"), "w+") do |fdoc|
     fdoc << <<~__HEREDOC
       # Material Design #{art_group} Art Overview
   
-      | Art Id | #{Wx::MDArt.art_client_ids_for_group(art_group).collect(&:to_s).join(' | ')} |
+      | Art Id | #{Wx::MDAP.art_client_ids_for_group(art_group).collect(&:to_s).join(' | ')} |
     __HEREDOC
     fdoc.print('|---|')
-    Wx::MDArt.art_client_ids_for_group(art_group).size.times { fdoc.print('---|') }
+    Wx::MDAP.art_client_ids_for_group(art_group).size.times { fdoc.print('---|') }
     fdoc.puts
-    Wx::MDArt.get_art_ids_for_group(art_group).each do |sym|
-      fdoc.print("| `Wx::MDArt::#{sym}`{:\##{sym}} |")
-      Wx::MDArt.art_client_ids_for_group(art_group).each do |clt|
-        svg = Wx::MDArt.art_for(Wx::MDArt.const_get(clt), Wx::MDArt.const_get(sym))
+    Wx::MDAP.get_art_ids_for_group(art_group).each do |sym|
+      fdoc.print("| `Wx::MDAP::#{sym}`{:\##{sym}} |")
+      Wx::MDAP.art_client_ids_for_group(art_group).each do |clt|
+        svg = Wx::MDAP.art_for(Wx::MDAP.const_get(clt), Wx::MDAP.const_get(sym))
         if svg
           fdoc.print " ![svg](data:image/svg+xml;base64,#{Base64.strict_encode64(File.read(svg))}){:height=\"32px\" :width=\"32px\"} |"
         else
@@ -105,7 +103,7 @@ end
 
 # Write standard ArtId mapping overview table
 File.open(File.join(doc_folder, "STANDARD-Art-Mappings.md"), "w+") do |fdoc|
-  mapped_clients = Wx::MDArt.get_all_art_clients - %i[ART_FONT_AWESOME_BRANDS ART_SIMPLE_ICONS_ICONS]
+  mapped_clients = Wx::MDAP.get_all_art_clients - %i[ART_FONT_AWESOME_BRANDS ART_SIMPLE_ICONS_ICONS]
   std_art_ids = %i[
     ART_ERROR ART_QUESTION ART_WARNING ART_INFORMATION ART_ADD_BOOKMARK ART_DEL_BOOKMARK
     ART_HELP_SIDE_PANEL ART_HELP_SETTINGS ART_HELP_BOOK ART_HELP_FOLDER ART_HELP_PAGE
@@ -129,11 +127,11 @@ File.open(File.join(doc_folder, "STANDARD-Art-Mappings.md"), "w+") do |fdoc|
   std_art_ids.each do |sym|
     fdoc.print("| `Wx::#{sym}` |")
     mapped_clients.each do |clt|
-      svg = Wx::MDArt.art_for(Wx::MDArt.const_get(clt), Wx.const_get(sym))
+      svg = Wx::MDAP.art_for(Wx::MDAP.const_get(clt), Wx.const_get(sym))
       if svg
         fdoc.print " ![svg](data:image/svg+xml;base64,#{Base64.strict_encode64(File.read(svg))}){:height=\"32px\" :width=\"32px\"} |"
       else
-        $stderr.puts "Missing Wx::MDArt::#{clt}[Wx::#{sym}]"
+        $stderr.puts "Missing Wx::MDAP::#{clt}[Wx::#{sym}]"
         fdoc.print('  |')
       end
     end
