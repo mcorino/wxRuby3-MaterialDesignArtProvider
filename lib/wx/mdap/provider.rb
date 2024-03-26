@@ -128,12 +128,12 @@ module Wx
           end
         end
 
-        # Returns the default art size for the given Material Design Art Client id.
+        # Returns the default art size for the given (standard or Material Design) Art Client id.
         # By default will derive default from {Wx::ArtProvider.get_native_size_hint}.
         # @param [String] client Art Client id
         # @return [Wx::size]
         def get_default_size(client)
-          raise ArgumentError, "Invalid Material Design art client id [#{client}]" unless MDAP.has_art_client_id?(client)
+          raise ArgumentError, "Invalid art client id [#{client}]" unless std_client_ids.include?(client) || MDAP.has_art_client_id?(client)
           unless default_sizes.has_key?(client)
             def_sz = Wx::ArtProvider.get_native_size_hint(client)
             default_sizes[client] = (def_sz == Wx::DEFAULT_SIZE ? Wx::Size.new(24,24) : def_sz)
@@ -141,11 +141,11 @@ module Wx
           default_sizes[client]
         end
 
-        # Sets the default art size for the given Material Design Art Client id.
+        # Sets the default art size for the given (standard or Material Design) Art Client id.
         # @param [String] client Art Client id
         # @param [Wx::Size,Array(Integer,Integer)] size
         def set_default_size(client, size)
-          raise ArgumentError, "Invalid Material Design art client id [#{client}]" unless MDAP.has_art_client_id?(client)
+          raise ArgumentError, "Invalid art client id [#{client}]" unless std_client_ids.include?(client) || MDAP.has_art_client_id?(client)
           default_sizes[client] = size.to_size
         end
 
@@ -182,6 +182,11 @@ module Wx
           std_client_id_map[std_client_id] = md_client_id
         end
 
+        # @api private
+        def resolve_client_id(client_id)
+          std_client_ids.include?(client_id) ? std_client_id_map[client_id] : client_id
+        end
+
       end
 
       protected
@@ -195,14 +200,13 @@ module Wx
       end
 
       def create_bitmap_bundle(id, client, size)
-        # map standard wxRuby3 client ids
-        if MaterialDesignArtProvider.std_client_ids.include?(client)
-          client = MaterialDesignArtProvider.std_client_id_map[client]
-        end
+        size = size.to_size # make sure to have a Wx::Size
+        # handle this **before** resolving the client id
+        size = MaterialDesignArtProvider.get_default_size(client) if size == Wx::DEFAULT_SIZE
+        # handle standard wxRuby3 client id mapping (if any)
+        client = MaterialDesignArtProvider.resolve_client_id(client)
         art_path = MDAP.get_art_for(client, id)
         return Wx::NULL_BITMAP unless art_path
-        size = size.to_size # make sure to have a Wx::Size
-        size = MaterialDesignArtProvider.get_default_size(client) if size == Wx::DEFAULT_SIZE
         if (art_clr = MaterialDesignArtProvider.__send__(:art_colour))
           svg_data = change_svg_colour(File.read(art_path), art_clr)
           Wx::BitmapBundle.from_svg(svg_data, size)
