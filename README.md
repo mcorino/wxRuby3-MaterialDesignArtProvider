@@ -32,7 +32,7 @@ the [Wx::MDAP::MaterialDesignArtProvider](https://mcorino.github.io/wxRuby3-MDAP
 
 ```ruby
 Wx::ArtProvider.push(Wx::MDAP::MaterialDesignArtProvider.new)
-# You can in fact normally also reference teh class as `Wx::MaterialDesignArtProvider` (unless the constant 
+# You can in fact normally also reference the class as `Wx::MaterialDesignArtProvider` (unless the constant 
 # `Wx::MaterialDesignArtProvider` was already defined before requiring 'wx/mdap').
 ```
 
