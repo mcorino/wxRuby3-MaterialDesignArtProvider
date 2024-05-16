@@ -28,6 +28,10 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      - name: Base GUI setup
+        run: |
+          tools/scripts/set-ubuntu.sh
+
       - name: Checkout
         uses: actions/checkout@v4
 
