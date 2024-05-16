@@ -6,4 +6,6 @@ gem 'rake'
 gem 'wxruby3'
 group :documentation, optional: true do
   gem 'yard', '~> 0.9'
+  gem 'kramdown'
+  gem 'base64'
 end
