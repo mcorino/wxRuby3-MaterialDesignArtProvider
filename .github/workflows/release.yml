@@ -1,0 +1,83 @@
+# CI wxRuby release workflow
+name: Release build
+
+on:
+  push:
+    tags:
+      - v*
+    paths-ignore:
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  release-gem:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-22.04
+            ruby: 'ruby'
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os }} wxRuby Release (${{ github.ref_name }})
+    env:
+      GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Install Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 'ruby'
+
+    - name: Setup Ruby gems
+      run: |
+        bundle install
+
+    - name: Build wxRuby3-MDAP gem
+      run: |
+        bundle exec rake gem
+
+    - name: Create GPG signature for wxRuby3-MDAP gem
+      run: |
+        echo -n "${{ secrets.GPG_KEY }}" | base64 --decode | gpg --pinentry-mode loopback --batch --passphrase ${{ secrets.GPG_PASSPHRASE }} --import
+        gpg --detach-sign --pinentry-mode loopback --batch --passphrase ${{ secrets.GPG_PASSPHRASE }} --armor pkg/*.gem
+
+    - name: Upload gem to release
+      if: github.event_name != 'workflow_dispatch'
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: pkg/*.gem
+        tag: ${{ github.ref }}
+        overwrite: true
+        file_glob: true
+
+    - name: Upload gem GPG signature to release
+      if: github.event_name != 'workflow_dispatch'
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: pkg/*.gem.asc
+        tag: ${{ github.ref }}
+        overwrite: true
+        file_glob: true
+
+    - name: Publish Gem on RubyGems
+      if: github.event_name != 'workflow_dispatch'
+      run: |
+        gem push pkg/*.gem
+
+    - name: Upload Gem as release test artifact
+      if: github.event_name == 'workflow_dispatch'
+      uses: actions/upload-artifact@v4
+      with:
+        name: wxruby3-mdap_release_test_gem
+        path: pkg/*.gem
