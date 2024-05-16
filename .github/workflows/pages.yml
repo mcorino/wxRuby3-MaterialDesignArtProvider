@@ -41,11 +41,7 @@ jobs:
           bundle config set --local with documentation
           bundle install
 
-      - name: Generate
-        run: |
-          bundle exec rake configure[--with-wxwin]
-
-      - name: Build wxRuby3 wxRuby3-MaterialDesignArtProvider
+      - name: Generate wxRuby3-MaterialDesignArtProvider
         run: |
           bundle exec ruby tools/generate_doc.rb
 
