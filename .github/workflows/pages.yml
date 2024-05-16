@@ -33,7 +33,7 @@ jobs:
 
       - name: Base GUI setup
         run: |
-          tools/scripts/set-ubuntu.sh
+          tools/scripts/setup-ubuntu.sh
 
       - name: Install Ruby
         uses: ruby/setup-ruby@v1
