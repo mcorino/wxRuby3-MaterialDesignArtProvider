@@ -19,7 +19,7 @@ gem install wxruby3-mdap
 
 ## Using
 
-To add [Wx::MDAP::MaterialDesignArtProvider](https://mcorino.github.io/wxRuby3-MDAP/Wx/MDAP/MaterialDesignArtProvider.html) 
+To add [Wx::MDAP::MaterialDesignArtProvider](https://mcorino.github.io/wxRuby3-MaterialDesignArtProvider/Wx/MDAP/MaterialDesignArtProvider.html) 
 to your project you first need to `require` it like this:
 
 ```ruby
@@ -28,7 +28,7 @@ require 'wx/mdap'   # now load the wxRuby3-MaterialDesignArtProvider library
 ```
 
 Next, before you load images through [Wx::ArtProvider](https://mcorino.github.io/wxRuby3/Wx/ArtProvider.html) register 
-the [Wx::MDAP::MaterialDesignArtProvider](https://mcorino.github.io/wxRuby3-MDAP/Wx/MDAP/MaterialDesignArtProvider.html) like this:
+the [Wx::MDAP::MaterialDesignArtProvider](https://mcorino.github.io/wxRuby3-MaterialDesignArtProvider/Wx/MDAP/MaterialDesignArtProvider.html) like this:
 
 ```ruby
 Wx::ArtProvider.push(Wx::MDAP::MaterialDesignArtProvider.new)
@@ -37,8 +37,8 @@ Wx::ArtProvider.push(Wx::MDAP::MaterialDesignArtProvider.new)
 ```
 
 Now that the new art provider has been installed the new Material Design art ids can be used. Constants for these are
-all defined in the `Wx::MDAP` module as 'Wx::MDAP::ART_*ICON_NAME*' (see [here](https://mcorino.github.io/wxRuby3-MDAP/Wx/MDAP.html)).
-Many of these art ids are available under most of the various client ids (also defined [here](https://mcorino.github.io/wxRuby3-MDAP/Wx/MDAP.html))
+all defined in the `Wx::MDAP` module as 'Wx::MDAP::ART_*ICON_NAME*' (see [here](https://mcorino.github.io/wxRuby3-MaterialDesignArtProvider/Wx/MDAP.html)).
+Many of these art ids are available under most of the various client ids (also defined [here](https://mcorino.github.io/wxRuby3-MaterialDesignArtProvider/Wx/MDAP.html))
 while others are only available under some client ids (as can be seen in the documentation).
 The client ids each correspond to a different collection in the full dataset: 
 
@@ -70,7 +70,7 @@ wxRuby3-MaterialDesignArtProvider offers several extensions to improve options f
 2. `Wx::MDAP::MaterialDesignArtProvider` supports using custom colors with Material Design art;
 3. `Wx::MDAP::MaterialDesignArtProvider` supports using custom default sizes with Material Design art.
 
-See [Wx::MDAP::MaterialDesignArtProvider](https://mcorino.github.io/wxRuby3-MDAP/Wx/MDAP/MaterialDesignArtProvider.html)
+See [Wx::MDAP::MaterialDesignArtProvider](https://mcorino.github.io/wxRuby3-MaterialDesignArtProvider/Wx/MDAP/MaterialDesignArtProvider.html)
 for details concerning these extensions.
 
 ## License
