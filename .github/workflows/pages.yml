@@ -51,7 +51,7 @@ jobs:
 
       - name: Generate wxRuby3-MaterialDesignArtProvider
         run: |
-          bundle exec ruby tools/generate_doc.rb
+          bundle exec ruby -Ilib tools/generate_doc.rb
 
       - name: Build wxRuby3 HTML docs
         run: |
