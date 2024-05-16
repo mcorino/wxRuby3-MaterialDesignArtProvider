@@ -41,6 +41,11 @@ jobs:
           bundle config set --local with documentation
           bundle install
 
+      - name: Test wxRuby3
+        run: |
+          bundle exec wxruby -h
+          bundle exec wxruby check
+
       - name: Generate wxRuby3-MaterialDesignArtProvider
         run: |
           bundle exec ruby tools/generate_doc.rb
