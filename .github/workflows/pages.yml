@@ -47,7 +47,6 @@ jobs:
 
       - name: Test wxRuby3
         run: |
-          bundle exec wxruby -h
           bundle exec wxruby check
 
       - name: Generate wxRuby3-MaterialDesignArtProvider
