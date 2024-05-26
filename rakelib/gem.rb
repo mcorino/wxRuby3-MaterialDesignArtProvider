@@ -20,7 +20,7 @@ module WXRuby3MDAP
     def self.manifest
       # create MANIFEST list with included files
       manifest = Rake::FileList.new
-      manifest.include %w[assets/**/* lib/**/*.rb samples/**/* tests/**/*]
+      manifest.include %w[assets/**/* lib/**/*.rb lib/wx/mdap/art/**/* samples/**/* tests/**/*]
       manifest.include 'rakelib/yard/**/*'
       manifest.include %w{LICENSE README.md CREDITS.md Apache2.0-LICENSE CC01.0-LICENSE.md CCBY4.0-LICENSE .yardopts}
       manifest
