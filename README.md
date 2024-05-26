@@ -1,3 +1,6 @@
+[![License](https://img.shields.io/badge/license-MIT-yellowgreen.svg)](LICENSE)
+[![Gem Version](https://badge.fury.io/rb/wxruby3-materialdesignartprovider.svg)](https://badge.fury.io/rb/wxruby3-materialdesignartprovider)
+[![Documentation](https://img.shields.io/badge/docs-pages-blue.svg)](https://mcorino.github.io/wxRuby3-MaterialDesignArtProvider)
 
 # Material Design Art Provider for wxRuby3
 
