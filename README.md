@@ -8,7 +8,7 @@ This custom Art Provider was inspired by [wxMaterialDesignArtProvider](https://g
 but rewritten in pure Ruby for use with [wxRuby3](https://github.com/mcorino/wxRuby3).<br>
 See the [License](#license) section below to see where the original icons were taken from.
 
-![screenshots](assets/repo-social-preview.png)
+![screenshots](assets/readme-screenshots.png)
 
 ## Installing
 
