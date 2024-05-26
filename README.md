@@ -73,6 +73,11 @@ wxRuby3-MaterialDesignArtProvider offers several extensions to improve options f
 See [Wx::MDAP::MaterialDesignArtProvider](https://mcorino.github.io/wxRuby3-MaterialDesignArtProvider/Wx/MDAP/MaterialDesignArtProvider.html)
 for details concerning these extensions.
 
+### Example
+
+For more details and a working example of how to use [Wx::MDAP::MaterialDesignArtProvider](https://mcorino.github.io/wxRuby3-MaterialDesignArtProvider/Wx/MDAP/MaterialDesignArtProvider.html)
+see [here](USAGE.md).
+
 ## License
 
 - FontAwesome icons from the FontAwesome 6 SVG set are subject to the [CC BY 4.0 License](CCBY4.0-LICENSE)<br>
