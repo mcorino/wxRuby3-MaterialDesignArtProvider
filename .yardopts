@@ -13,6 +13,7 @@ lib
 -
 lib/wx/mdap/doc/**/*.md
 LICENSE
+USAGE.md
 CREDITS.md
 Apache2.0-LICENSE
 CC01.0-LICENSE.md
