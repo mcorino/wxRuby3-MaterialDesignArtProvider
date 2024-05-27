@@ -104,8 +104,8 @@ class TestFrame < Wx::Frame
     set_menu_bar(menuBar)
 
     # Create a panel to place the toolbar in (a toolbar could also be attached directly to a Wx::Frame but this
-    # has the unfortunate effect, AFAIAC, that on MacOSX it gets integrated in the apps title bar which is not always 
-    # pretty). 
+    # has unfortunate effects with the MacOSX native toolbar integration in the app title bar which does not work
+    # for small icons and, IMO, is not very pretty). 
     panel = Wx::Panel.new(self)
 
     panel_szr = Wx::VBoxSizer.new
@@ -127,8 +127,8 @@ class TestFrame < Wx::Frame
     tbar.add_tool(Wx::StandardID::ID_FIND, 'Find', Wx::ArtProvider.get_bitmap(Wx::ART_FIND, Wx::ART_TOOLBAR), 'Show Find Dialog')
     tbar.add_tool(Wx::StandardID::ID_REPLACE, 'Replace', Wx::ArtProvider.get_bitmap(Wx::ART_FIND_AND_REPLACE, Wx::ART_TOOLBAR), 'Show Replace Dialog')
     tbar.realize
-    
-    panel_szr.add(tbar)
+
+    panel_szr.add(tbar, 0, Wx::Stretch::EXPAND)
     
     panel.set_sizer(panel_szr)
     
