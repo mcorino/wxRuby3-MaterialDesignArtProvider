@@ -18,28 +18,28 @@ be downloaded from the release assets on [Github](https://github.com/mcorino/wxR
 Installing the gem requires no additional installation steps and/or additional software to be installed except for a
 supported version of the Ruby interpreter. So the following command is all it takes to install:
 
-```shell
+~~~shell
 gem install wxruby3-mdap
-```
+~~~
 
 ## Using
 
 To add [Wx::MDAP::MaterialDesignArtProvider](https://mcorino.github.io/wxRuby3-MaterialDesignArtProvider/Wx/MDAP/MaterialDesignArtProvider.html) 
 to your project you first need to `require` it like this:
 
-```ruby
+~~~ruby
 require 'wx'        # make sure the wxRuby3 libraries have been loaded 
 require 'wx/mdap'   # now load the wxRuby3-MaterialDesignArtProvider library
-```
+~~~
 
 Next, before you load images through [Wx::ArtProvider](https://mcorino.github.io/wxRuby3/Wx/ArtProvider.html) register 
 the [Wx::MDAP::MaterialDesignArtProvider](https://mcorino.github.io/wxRuby3-MaterialDesignArtProvider/Wx/MDAP/MaterialDesignArtProvider.html) like this:
 
-```ruby
+~~~ruby
 Wx::ArtProvider.push(Wx::MDAP::MaterialDesignArtProvider.new)
 # You can in fact normally also reference the class as `Wx::MaterialDesignArtProvider` (unless the constant 
 # `Wx::MaterialDesignArtProvider` was already defined before requiring 'wx/mdap').
-```
+~~~
 
 Now that the new art provider has been installed the new Material Design art ids can be used. Constants for these are
 all defined in the `Wx::MDAP` module as 'Wx::MDAP::ART_*ICON_NAME*' (see [here](https://mcorino.github.io/wxRuby3-MaterialDesignArtProvider/Wx/MDAP.html)).

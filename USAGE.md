@@ -16,7 +16,7 @@ The following commandline switches are available to enable or disable options:
 - `-l|--large`<br>directs the example to use large (48x48) Material Design icons
 - `-cCOLOUR|--colour=COLOUR`<br>directs the example to use `COLOUR` for Material Design icons; `COLOUR` can be specified as a colour name (like `red` or `darkblue`) or CSS (`rgb(r,g,b)`, like `rgb(255,0,0)`, or `rgba(r,g,b,a)` like `rgba(255,0,0,0.333)`) or HTML (`#??????` like `#FF0000`) syntax.
 
-```ruby
+~~~ruby
 # Copyright (c) 2023 M.J.N. Corino, The Netherlands
 #
 # This software is released under the MIT license.
@@ -180,4 +180,4 @@ end
 
 # run the application
 TestApp.run
-```
+~~~
