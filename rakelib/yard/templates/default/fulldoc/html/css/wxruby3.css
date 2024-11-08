@@ -1,4 +1,7 @@
 
+code span.line-numbers {
+    display: none;
+}
 div.wxrb-note {
     background: #f7f7f9;
     border-left: .6em solid #f3ba6f;
