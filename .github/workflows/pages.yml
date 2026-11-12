@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Base GUI setup
         run: |
@@ -59,7 +59,7 @@ jobs:
 
       - name: Upload doc archive
         if: ${{ github.event_name == 'workflow_dispatch' }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: wxruby3-mdap-html-reference
           path: doc
@@ -67,11 +67,11 @@ jobs:
 
       - name: Setup Pages
         if: ${{ github.event_name != 'workflow_dispatch' }}
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Upload artifact
         if: ${{ github.event_name != 'workflow_dispatch' }}
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           # Upload Yard output only
           path: doc
@@ -79,7 +79,7 @@ jobs:
       - name: Deploy to GitHub Pages
         if: ${{ github.event_name != 'workflow_dispatch' }}
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
       - name: Archive html references docs
         if: ${{ github.event_name != 'workflow_dispatch' }}
